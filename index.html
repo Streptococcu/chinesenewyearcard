@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การ์ดตรุษจีน</title>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #ffebcd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card {
+            background-color: #ff4d4d;
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            color: gold;
+        }
+
+        /* Snowflakes/emoji style */
+        .snowflake {
+            position: absolute;
+            top: -50px;
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                opacity: 1;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="card" onclick="nextPage()">
+        <h1 id="title">Special for you, click for ???</h1>
+        <p id="message"></p>
+        <p class="chinese-symbol" id="chineseSymbol"></p>
+        <div class="footer">
+            ❤️
+        </div>
+    </div>
+
+    <script>
+        const pages = [
+            {
+                title: "Special for you, click for ???",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "Surprise 🎉🥳",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "Happy Chinese New Year!🧨🐲🏮",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "To P'Mimmm ><",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "🧧🎆❤️",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "新正如意 新年发财 (ซินเจียยู่อี่ ซินนี้ฮวดไช้)",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "ขอให้ปีนี้ พี่มิ้มเต็มไปด้วยความสุข",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "เสียงหัวเราะ และความโชคดี",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "สุขภาพแข็งแรง คิดอะไรก็สมปรารถนาคั้บบ",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "รวมถึงคนรอบๆตัวด้วย",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "ขอให้ปีหน้า เราได้ใช้เวลาอยู่ด้วยกันวันตรุษจีนนะค้าบ 我爱你 nakub jubb xoxo",
+                message: "",
+                chineseSymbol: ""
+            },
+            {
+                title: "",
+                message: "",
+                chineseSymbol: `<img src="https://api.qrserver.com/v1/create-qr-code/?data=https://open.spotify.com/embed/track/6EIMUjQ7Q8Zr2VtIUik4He?utm_source=generator&size=200x200" alt="Spotify QR Code" />`
+            },
+            {
+                title: "From PP😎",
+                message: "",
+                chineseSymbol: ""
+            }
+        ];
+
+        let currentPage = 0;
+
+        function nextPage() {
+            currentPage++;
+            if (currentPage >= pages.length) {
+                currentPage = 0; // กลับไปหน้าที่ 1 เมื่อถึงหน้าสุดท้าย
+            }
+            updateCardContent();
+        }
+
+        function updateCardContent() {
+            const page = pages[currentPage];
+            document.getElementById('title').textContent = page.title;
+            document.getElementById('message').textContent = page.message;
+            document.getElementById('chineseSymbol').innerHTML = page.chineseSymbol;
+        }
+
+        // Initial card setup
+        updateCardContent();
+
+        // Snowflakes/emoji falling effect
+        const emojis = ["🔴", "🐉", "🏮", "🧧", "❤️", "🎆"];
+
+        function createSnowflake() {
+            const snowflake = document.createElement("div");
+            snowflake.classList.add("snowflake");
+
+            // Randomize emoji
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            snowflake.innerText = randomEmoji;
+
+            // Randomize position and animation speed
+            const randomX = Math.random() * 100;
+            const randomDelay = Math.random() * 5;  // Delay before starting
+            const randomDuration = Math.random() * 3 + 5; // Fall duration between 5 and 8 seconds
+
+            snowflake.style.left = `${randomX}%`;
+            snowflake.style.animationDuration = `${randomDuration}s`;
+            snowflake.style.animationDelay = `${randomDelay}s`;
+
+            document.body.appendChild(snowflake);
+
+            // Remove snowflake after animation ends
+            snowflake.addEventListener("animationend", () => {
+                snowflake.remove();
+            });
+        }
+
+        // Create snowflakes every 1000ms
+        setInterval(createSnowflake, 1000);
+
+    </script>
+
+</body>
+</html>
